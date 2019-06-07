@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
   }
   render() {
     return <div>
-        <House Houses={this.state.houses}/>
+        <House houses={this.state.houses}/>
 
     </div>;
   }

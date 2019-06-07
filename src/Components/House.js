@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+
 export class House extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            houses: []
+            
         }
         // this.deleteOne = this.deleteOne.bind(this)
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         setTimeout(() => {
         axios
         .get('/api/properties')
@@ -20,31 +21,53 @@ export class House extends Component {
     }
 
 
-    // deleteOne(id) {
-    //     axios
-    //         .delete(`/api/properties/${id}`)
-    //         .then(() => this.componentDidMount())
-    //         .catch(error => console.log(`House-axiosDelete: ${error}`))
-    // }
+
 
     render() {
-    let { houses } = this.state
-    let displayHouses = houses.map(house => {
+    let { houses } = this.props
+    let displayHouses = houses.map((property, index) => {
         return (
-            <House 
-            id={houses.id}
-            name={houses.name}
-            city={houses.city}
-            state={houses.state}
-            image={houses.image_url}
-            zipcode={houses.zipcode}
-            monthly_rent={houses.monthly_rent}
-            monthly_mortgage={houses.monthly_mortgage}
-            address={houses.address}
-            // deleteOneFn={this.deleteOne}
-            />
-        )
-    })
+            <div className="productbox">
+            <header className="productimage">
+              <img style={{width: "25vw"}} src={property.image_url} alt={property.product_name}></img>
+            </header>
+            <div key={index}>
+              <h1 key="product_name">{property.name}</h1>
+              <h2>
+               Address: {property.address}
+              </h2>
+              <h2>
+               City:  {property.city}
+              </h2>
+              <h2>
+               State: {property.state}
+              </h2>
+              <h2>
+               ZIP: {property.zipcode}
+              </h2>
+              <h2>
+               Monthly Rent: ${property.monthly_rent}
+              </h2>
+              <h2>
+               Monthly Mortgage ${property.monthly_mortgage}
+              </h2>
+            </div>
+            <button
+                onClick={() => {
+                  axios
+                  .delete("/api/products/" + property.id)
+                  .then(response => {
+                    this.state.delete(response.data);
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
+                }}
+              >
+                Delete
+              </button>
+          </div>
+        )});
         return (
             <div className='House'>
                 { displayHouses }

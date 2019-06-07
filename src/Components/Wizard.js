@@ -56,11 +56,14 @@ export default class Wizard extends Component {
     this.setState({ name: "", address: "", city: "", state: "", zipcode: 0, monthly_mortgage: 0, monthly_rent: 0, image_url: "" });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.props.getHouses(this.props);
-    }
-  }
+  componentDidUpdate() {
+    setTimeout(() => {
+    axios
+    .get('/api/properties')
+    .then(response => this.setState({ houses: response.data }))
+    .catch(error => console.log(`House-axiosGet: ${error}`))
+    }, 1000)
+}
 
   render() {
 

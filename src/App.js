@@ -9,11 +9,11 @@ export default class App extends Component {
         <div>
           <nav className="nav">
             <div>Houser</div>
-            <div className="link-wrap">
+            <main className="container">
               <Link to="/wizard/step1" className="links">
                 Add New Property
               </Link>
-            </div>
+            </main>
           </nav>
           {routes}
         </div>

@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
+// import { Link } from 'react-router-dom'
 import House from './House'
 
 export default class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      Houses: []
+      houses: []
     };
   }
 
-//   componentDidMount() {
-//     axios.get("/api/Houses").then(response => {
-//       this.setState({ Houses: response.data });
-//     });
-//   }
+  componentDidMount() {
+    axios.get("/api/properties").then(response => {
+      this.setState({ houses: response.data });
+    });
+  }
   render() {
     return <div>
-        <House Houses={this.state.Houses}/>
+        <House Houses={this.state.houses}/>
 
     </div>;
   }

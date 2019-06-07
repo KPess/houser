@@ -1,9 +1,10 @@
 UPDATE houser SET
 name = $2,
-city = $3,
-state = $4,
-zipcode = $5,
-image_url = $6,
-monthly_rent = $7,
-monthly_mortgage = $8
+address = $3,
+city = $4,
+state = $5,
+zipcode = $6,
+image_url = $7,
+monthly_rent = $8,
+monthly_mortgage = $9
 WHERE id = $1;
